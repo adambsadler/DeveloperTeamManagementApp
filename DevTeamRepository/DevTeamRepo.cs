@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevTeamRepository
 {
-    public class DevTeamRepository
+    public class DevTeamRepo
     {
         private List<DevTeam> _listOfTeams = new List<DevTeam>();
         private int _countId;

@@ -50,5 +50,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DevTeamRepository\DevTeamRepository.csproj">
+      <Project>{0ddb63ac-1f0a-44bf-8b5f-b66bfd16ca6e}</Project>
+      <Name>DevTeamRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="TeamManagementApp_Tests\TeamManagementApp_Tests.csproj">
+      <Project>{b9d63788-f25a-48d3-a9c1-1f2aa01ecd80}</Project>
+      <Name>TeamManagementApp_Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
