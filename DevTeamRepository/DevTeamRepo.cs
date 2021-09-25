@@ -18,10 +18,23 @@ namespace DevTeamRepository
             _listOfTeams.Add(devTeam);
         }
 
+        public void AddDeveloperToTeam(List<Developer> developers, DevTeam devTeam)
+        {
+            foreach (Developer developer in developers)
+            {
+                devTeam.TeamMembers.Add(developer);
+            }
+        }
+
         // Read
         public List<DevTeam> GetTeamList()
         {
             return _listOfTeams;
+        }
+
+        public List<Developer> GetTeamMembers(DevTeam devTeam)
+        {
+            return devTeam.TeamMembers;
         }
 
         // Update
@@ -63,8 +76,16 @@ namespace DevTeamRepository
             }
         }
 
+        public void RemoveDeveloperFromTeam(List<Developer> developers, DevTeam devTeam)
+        {
+            foreach (Developer developer in developers)
+            {
+                devTeam.TeamMembers.Remove(developer);
+            }
+        }
+
         // Helper Method
-        private DevTeam FindTeamById(int id)
+        public DevTeam FindTeamById(int id)
         {
             foreach(DevTeam devTeam in _listOfTeams)
             {

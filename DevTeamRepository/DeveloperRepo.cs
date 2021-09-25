@@ -66,7 +66,7 @@ namespace DevTeamRepository
         }
 
         // Helper Method
-        private Developer FindDeveloperById(int id)
+        public Developer FindDeveloperById(int id)
         {
             foreach(Developer developer in _listOfDevelopers)
             {
