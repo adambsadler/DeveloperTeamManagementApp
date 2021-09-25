@@ -17,15 +17,16 @@ namespace DeveloperTeamManagementApp
             MainMenu();
         }
 
+        // Main Menu
         private void MainMenu()
         {
             Console.Clear();
-            Console.WriteLine("**************************************");
-            Console.WriteLine("*****                            *****");
-            Console.WriteLine("***        Komodo Insurance        ***");
-            Console.WriteLine("**     Developer Team Management    **");
-            Console.WriteLine("***                                ***");
-            Console.WriteLine("**************************************");
+            Console.WriteLine("******************************************");
+            Console.WriteLine("*****                                *****");
+            Console.WriteLine("***          Komodo Insurance          ***");
+            Console.WriteLine("**       Developer Team Management      **");
+            Console.WriteLine("***                                    ***");
+            Console.WriteLine("******************************************");
             Console.WriteLine("Welcome! Please select from the options below:\n" +
                 "1. Manage Developers\n" +
                 "2. Manage Teams\n" +
@@ -38,19 +39,19 @@ namespace DeveloperTeamManagementApp
             {
                 switch (userInput)
                 {
-                    case "1":
+                    case "1": // Manage Developers
                         validInput = true;
                         ManageDevelopersMenu();
                         break;
-                    case "2":
+                    case "2": // Manage Teams
                         validInput = true;
                         ManageTeamsMenu();
                         break;
-                    case "3":
+                    case "3": // HR Reporting
                         validInput = true;
                         HrMenu();
                         break;
-                    case "4":
+                    case "4": // Exit 
                         validInput = true;
                         Console.Clear();
                         Console.WriteLine("Thank you for using the Developer Team Management Application.");
@@ -71,6 +72,7 @@ namespace DeveloperTeamManagementApp
             }
         }
 
+        // Manage Developers Menu, for creating, updating, and removing developers
         private void ManageDevelopersMenu()
         {
             Console.Clear();
@@ -129,6 +131,8 @@ namespace DeveloperTeamManagementApp
                 }
             }
         }
+
+        // Manage Teams Menu, for creating and updating teams, as well as assigning and removing developers to/from those teams
         private void ManageTeamsMenu()
         {
             Console.Clear();
@@ -138,7 +142,8 @@ namespace DeveloperTeamManagementApp
                  "3. Update Team Name\n" +
                  "4. Assign Developers to Team\n" +
                  "5. Remove Developers From Team\n" +
-                 "6. Back to Main Menu");
+                 "6. Delete Team\n" +
+                 "7. Back to Main Menu");
 
             string userInput = Console.ReadLine();
             bool validInput = false;
@@ -146,39 +151,46 @@ namespace DeveloperTeamManagementApp
             {
                 switch(userInput)
                 {
-                    case "1":
+                    case "1": // Create New Team
                         validInput = true;
                         CreateNewTeam();
                         break;
-                    case "2":
+                    case "2": // Display All Teams
                         validInput = true;
                         DisplayAllTeams();
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
                         ManageTeamsMenu();
                         break;
-                    case "3":
+                    case "3": // Update Team Name
                         validInput = true;
                         UpdateTeamInfo();
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
                         ManageTeamsMenu();
                         break;
-                    case "4":
+                    case "4": // Assign Developers to Team
                         validInput = true;
                         AssignDeveloperToTeam();
                         Console.WriteLine("Assignment complete. Press any key to continue...");
                         Console.ReadKey();
                         ManageTeamsMenu();
                         break;
-                    case "5":
+                    case "5": // Remove Developers from Team
                         validInput = true;
                         RemoveDeveloperFromTeam();
                         Console.WriteLine("Developers removed. Press any key to continue...");
                         Console.ReadKey();
                         ManageTeamsMenu();
                         break;
-                    case "6":
+                    case "6": // Delete Team
+                        validInput = true;
+                        DeleteTeam();
+                        Console.WriteLine("Developers removed. Press any key to continue...");
+                        Console.ReadKey();
+                        ManageTeamsMenu();
+                        break;
+                    case "7": // Back to Main Menu
                         validInput = true;
                         MainMenu();
                         break;
@@ -190,12 +202,15 @@ namespace DeveloperTeamManagementApp
                             "3. Update Team Name\n" +
                             "4. Assign Developers to Team\n" +
                             "5. Remove Developers From Team\n" +
-                            "6. Back to Main Menu");
+                            "6. Delete Team\n" +
+                            "7. Back to Main Menu");
                         userInput = Console.ReadLine();
                         break;
                 }
             }
         }
+
+        // HR Reporting Tool
         private void HrMenu()
         {
             Console.Clear();
@@ -219,6 +234,7 @@ namespace DeveloperTeamManagementApp
             MainMenu();
         }
 
+        // Method for creating a new developer
         private void CreateNewDeveloper()
         {
             Console.Clear();
@@ -259,6 +275,7 @@ namespace DeveloperTeamManagementApp
             MainMenu();
         }
 
+        // Method for creating a new team
         private void CreateNewTeam()
         {
             Console.Clear();
@@ -274,6 +291,7 @@ namespace DeveloperTeamManagementApp
             MainMenu();
         }
 
+        // Method for displaying all developers on the list
         private void DisplayAllDevelopers()
         {
             Console.Clear();
@@ -288,6 +306,7 @@ namespace DeveloperTeamManagementApp
             }
         }
 
+        // Method for displaying all teams on the list
         private void DisplayAllTeams()
         {
             Console.Clear();
@@ -307,6 +326,7 @@ namespace DeveloperTeamManagementApp
             }
         }
 
+        // Method used to update a developer's information
         private void UpdateDeveloperInfo()
         {
             DisplayAllDevelopers();
@@ -357,6 +377,7 @@ namespace DeveloperTeamManagementApp
             }
         }
 
+        // Method to change a team's name
         private void UpdateTeamInfo()
         {
             DisplayAllTeams();
@@ -382,6 +403,7 @@ namespace DeveloperTeamManagementApp
             }
         }
         
+        // Method for deleting a developer from the list
         private void RemoveDeveloper()
         {
             DisplayAllDevelopers();
@@ -401,6 +423,27 @@ namespace DeveloperTeamManagementApp
             }
         }
 
+        // Method for deleting a team from the list
+        private void DeleteTeam()
+        {
+            DisplayAllTeams();
+
+            Console.WriteLine("Enter the ID of the team to delete:");
+            int oldId = Int32.Parse(Console.ReadLine());
+
+            bool wasRemoved = _devTeamRepo.RemoveTeamFromList(oldId);
+
+            if(wasRemoved)
+            {
+                Console.WriteLine("The team was successfully deleted.");
+            }
+            else
+            {
+                Console.WriteLine("The team could not be deleted. Please try again.");
+            }
+        }
+
+        // Method used to assign one or more developers to a chosen team
         private void AssignDeveloperToTeam()
         {
             Console.Clear();
@@ -424,6 +467,7 @@ namespace DeveloperTeamManagementApp
             _devTeamRepo.AddDeveloperToTeam(chosenDevelopers, chosenTeam);
         }
 
+        // Method used to remove one or more developers from a chosen team
         private void RemoveDeveloperFromTeam()
         {
             Console.Clear();

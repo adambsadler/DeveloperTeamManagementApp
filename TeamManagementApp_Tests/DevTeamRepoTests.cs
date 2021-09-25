@@ -4,7 +4,7 @@ using System;
 namespace TeamManagementApp_Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class DevTeamRepoTests
     {
         [TestMethod]
         public void TestMethod1()
